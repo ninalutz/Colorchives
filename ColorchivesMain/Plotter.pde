@@ -34,7 +34,8 @@ class Plotter{
   
   
   Plotter(ArrayList<PVector> _data, boolean hsv){
-    data = _data;
+    //data = _data;
+    testData();
     x_axis = axis_length;
     y_axis = -axis_length;
     z_axis = axis_length;
@@ -48,6 +49,24 @@ class Plotter{
     zrange = 100; //bright
     }
   }
+  
+  Plotter(ArrayList<PVector> _data, boolean hsv, boolean hsl){
+    //data = _data;
+    testData();
+    x_axis = axis_length;
+    y_axis = -axis_length;
+    z_axis = axis_length;
+    String x = "R";
+    String y = "G";
+    String z = "B";
+    
+    if(hsl || hsv){  
+    xrange = 360; //hue
+    yrange = 100; //sat
+    zrange = 100; //bright
+    }
+  }
+  
   
   void draw(){
     for (int i = 0; i < data.size(); i++){   
@@ -72,6 +91,19 @@ class Plotter{
      }
     axisHSB();
   }
+  
+  void drawHSL(){
+   for (int i = 0; i < data.size(); i++){  
+      PVector d = data.get(i);
+      PVector d2 = RGBtoHSL(d);
+      PVector p = dataToAxis(d2);
+      strokeWeight(4);
+      colorMode(RGB);
+      stroke(d.x, d.y, d.z);
+      point(p.x, p.y, p.z);
+     }
+    axisHSB();
+  }
  
   PVector dataToAxis(PVector point){
     PVector p;
@@ -84,6 +116,10 @@ class Plotter{
 
   PVector RGBtoHSB(PVector p){
     return rgb_to_hsv(p);
+  }
+  
+  PVector RGBtoHSL(PVector p){
+    return rgbToHSL(p);
   }
   
   void axis(){

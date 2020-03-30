@@ -11,11 +11,11 @@ Plotter p;
 
 void setup ()
 {
-  size(900, 900, P3D);
+  size(800, 800, P3D);
   processImage("test2.jpeg");
   cam = new PeasyCam(this, 1000);
   cam.setFreeRotationMode();
-  p = new Plotter(imageData, true);
+  p = new Plotter(imageData, true, true);
 }
 
 
@@ -25,6 +25,6 @@ void draw()
   fill(0);
   image(pic, -300, -300);
   text(frameRate, 30, 30);
-  p.drawHSV();
+  p.drawHSL();
 
 }
