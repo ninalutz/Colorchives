@@ -7,12 +7,17 @@ import peasy.*;
 PeasyCam cam;
 
 Plotter p; 
-
+boolean hsv = true;
+boolean hsl;
+boolean rgb;
+String mode = "";
 void setup ()
 {
   size(800, 800, P3D);
-  
-  processImage("test5.jpg");
+  if(rgb) mode = "RGB";
+  if(hsl) mode = "HSL";
+  if(hsv) mode = "HSV";
+  processImage("test.jpg");
   setupClusters();
   cam = new PeasyCam(this, 1000);
   cam.setFreeRotationMode();
@@ -23,10 +28,10 @@ void setup ()
 void draw()
 {
   background(20);
-  fill(0);
   image(pic, -300 - pic.width/2, -300);
   fill(255);
-  text(frameRate, -350, -350);
+  textSize(20);
+  text(mode, -350, -350);
   p.draw();
   drawClusters();
 }

@@ -4,8 +4,8 @@ class Plotter{
   float x_axis, y_axis, z_axis;
   String x, y, z;
   int xrange, yrange, zrange;
-  boolean hsl, hsv;
-  
+
+
   Plotter(){
     x_axis = axis_length;
     y_axis = -axis_length;
@@ -24,8 +24,6 @@ class Plotter{
     x_axis = axis_length;
     y_axis = -axis_length;
     z_axis = axis_length;
-    hsl = false;
-    hsv = false;
     //defaults to RGB
     xrange = 255;
     yrange = 255;
@@ -33,38 +31,6 @@ class Plotter{
     String x = "R";
     String y = "G";
     String z = "B";
-  }
-  
-  
-  Plotter(ArrayList<PVector> _data, boolean _hsv){
-    data = _data;
-    hsv = _hsv;
-    hsl = false;
-    x_axis = axis_length;
-    y_axis = -axis_length;
-    z_axis = axis_length;
-    String x = "R";
-    String y = "G";
-    String z = "B";
-    
-    if(hsv){  
-    xrange = 360; //hue
-    yrange = 100; //sat
-    zrange = 100; //bright
-    }
-  }
-  
-  Plotter(ArrayList<PVector> _data, boolean _hsv, boolean _hsl){
-    data = _data;
-    //testData();
-    x_axis = axis_length;
-    y_axis = -axis_length;
-    z_axis = axis_length;
-    String x = "R";
-    String y = "G";
-    String z = "B";
-    hsv = _hsv;
-    hsl = _hsl;
     if(hsl || hsv){  
     xrange = 360; //hue
     yrange = 100; //sat
@@ -72,19 +38,24 @@ class Plotter{
     }
   }
   
+  
+  
   void draw(){
     if(hsv) drawHSV();
     if (hsl) drawHSL();
-    else drawRGB();
+    if(rgb) drawRGB();
     axis();
   }
+  
+  int alpha = 10;
+  int strokeW = 10;
   
   void drawRGB(){
     for (int i = 0; i < data.size(); i++){   
       PVector d = data.get(i);
       PVector p = dataToAxis(d);
-      strokeWeight(20);
-      stroke(d.x, d.y, d.z, 5);
+      strokeWeight(strokeW);
+      stroke(d.x, d.y, d.z, alpha);
       point(p.x, p.y, p.z);
      }
   }
@@ -94,8 +65,8 @@ class Plotter{
       PVector d = data.get(i);
       PVector d2 = RGBtoHSV(d);
       PVector p = dataToAxis(d2);
-      strokeWeight(4);
-      stroke(d.x, d.y, d.z, 20);
+      strokeWeight(strokeW);
+      stroke(d.x, d.y, d.z, alpha);
       point(p.x, p.y, p.z);
      }
     axis();
@@ -106,8 +77,8 @@ class Plotter{
       PVector d = data.get(i);
       PVector d2 = RGBtoHSL(d);
       PVector p = dataToAxis(d2);
-      strokeWeight(4);
-      stroke(d.x, d.y, d.z, 20);
+      strokeWeight(strokeW);
+      stroke(d.x, d.y, d.z, alpha);
       point(p.x, p.y, p.z);
      }
     axis();
@@ -125,7 +96,7 @@ class Plotter{
   }
   
   PVector RGBtoHSL(PVector p){
-    return rgbToHSL(p);
+    return rgb_to_hsl(p);
   }
   
   void axis(){

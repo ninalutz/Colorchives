@@ -1,6 +1,6 @@
 // k-means 
 // CONSTANTS
-final int NUM_CLUSTERS = 5;
+final int NUM_CLUSTERS = 8;
 boolean adjusted = false;
 // GLOBALS
 Point3D [] points;
@@ -13,7 +13,21 @@ void setupClusters(){
   clusters = new Point3D[NUM_CLUSTERS];
   
   for(int i =0; i<imageData.size(); i++){
+    if(hsv){
+      PVector c = new PVector(imageData.get(i).x, imageData.get(i).y, imageData.get(i).z);
+      PVector c2 =  rgb_to_hsv(c);
+      points[i] = new Point3D(c2.x, c2.y, c2.z);
+    }
+    
+    if(hsl){
+      PVector c = new PVector(imageData.get(i).x, imageData.get(i).y, imageData.get(i).z);
+      PVector c2 =  rgb_to_hsl(c);
+      points[i] = new Point3D(c2.x, c2.y, c2.z);
+    }
+    
+    if(rgb){
     points[i] = new Point3D(imageData.get(i).x, imageData.get(i).y, imageData.get(i).z);
+    }
   }
 
   for(int j=0;j<clusters.length;++j) {
@@ -33,41 +47,35 @@ void drawClusters() {
   }
  
   //// the clusters
-  strokeWeight(25);
-  
+  strokeWeight(20);
   for(int j=0;j<clusters.length;++j) {
     stroke(clusterColor(j));
     point(clusters[j].x,clusters[j].y, clusters[j].z);
-  //  text(j + ":" + clusters[j].x, clusters[j].x + 5,clusters[j].y + 5, clusters[j].z);
-  }
+ }
+ 
+ //strokeWeight(1);
+ //for(int i=0;i<points.length;i++) {
+ //   stroke(points[i].x,points[i].y, points[i].z, 100);
+ //   point(points[i].x,points[i].y, points[i].z);
+ //}
   if(clusters[0].x == prevCluster0) adjusted = true;
 }
 
-void drawPoints(){
-  ////the Points
-  //strokeWeight(4);
-  //for(int i=0;i<points.length;++i) {
-  //  clusterColor(points[i].cluster);
-  //  stroke(imageData.get(i).x, imageData.get(i).y, imageData.get(i).z);
-  //  point(points[i].x,points[i].y, points[i].z);
-  //}
-}
-
 public color clusterColor(int j){
-  
+  //
   color c = color(0, 0, 0);
   int clusterSize = 1; 
-  float x = 0; float y = 0; float z = 0;
+  float x = 0; float y = 0; float z = 0;//
   for(int i=0;i<points.length;++i) {
     if(points[i].cluster == j){
-      x+= points[i].x;
-      y+= points[i].y;
-      z+= points[i].z;
+      x+= imageData.get(i).x;
+      y+= imageData.get(i).y;
+      z+= imageData.get(i).z;
       clusterSize += 1;
     }
   }
-  
-  return color(x/clusterSize, y/clusterSize, z/clusterSize);
+   return color(x/clusterSize, y/clusterSize, z/clusterSize);
+ 
 }
 
 float distance3(Point3D a,Point3D b) {
