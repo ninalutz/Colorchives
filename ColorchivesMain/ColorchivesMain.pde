@@ -12,7 +12,7 @@ void setup ()
 {
   size(800, 800, P3D);
   
-  processImage("test.jpg");
+  processImage("test5.jpg");
   setupClusters();
   cam = new PeasyCam(this, 1000);
   cam.setFreeRotationMode();
@@ -22,9 +22,10 @@ void setup ()
 
 void draw()
 {
-  background(128);
+  background(20);
   fill(0);
-  image(pic, -300, -300);
+  image(pic, -300 - pic.width/2, -300);
+  fill(255);
   text(frameRate, -350, -350);
   p.draw();
   drawClusters();

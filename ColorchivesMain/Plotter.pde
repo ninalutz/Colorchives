@@ -83,8 +83,8 @@ class Plotter{
     for (int i = 0; i < data.size(); i++){   
       PVector d = data.get(i);
       PVector p = dataToAxis(d);
-      strokeWeight(4);
-      stroke(d.x, d.y, d.z);
+      strokeWeight(20);
+      stroke(d.x, d.y, d.z, 5);
       point(p.x, p.y, p.z);
      }
   }
@@ -95,7 +95,7 @@ class Plotter{
       PVector d2 = RGBtoHSV(d);
       PVector p = dataToAxis(d2);
       strokeWeight(4);
-      stroke(d.x, d.y, d.z);
+      stroke(d.x, d.y, d.z, 20);
       point(p.x, p.y, p.z);
      }
     axis();
@@ -107,7 +107,7 @@ class Plotter{
       PVector d2 = RGBtoHSL(d);
       PVector p = dataToAxis(d2);
       strokeWeight(4);
-      stroke(d.x, d.y, d.z);
+      stroke(d.x, d.y, d.z, 20);
       point(p.x, p.y, p.z);
      }
     axis();
