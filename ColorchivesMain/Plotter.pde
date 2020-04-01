@@ -1,10 +1,10 @@
 class Plotter{
   ArrayList<PVector> data;
-  float axis_length = 300;
+  float axis_length = 100;
   float x_axis, y_axis, z_axis;
   String x, y, z;
   int xrange, yrange, zrange;
-
+  boolean rgb, hsv, hsl;
 
   Plotter(){
     x_axis = axis_length;
@@ -21,6 +21,7 @@ class Plotter{
   
   Plotter(ArrayList<PVector> _data){
     data = _data;
+    //testData();
     x_axis = axis_length;
     y_axis = -axis_length;
     z_axis = axis_length;
@@ -38,6 +39,29 @@ class Plotter{
     }
   }
   
+   Plotter(ArrayList<PVector> _data, boolean _rgb, boolean _hsv, boolean _hsl){
+    data = _data;
+    //testData();
+    x_axis = axis_length;
+    y_axis = -axis_length;
+    z_axis = axis_length;
+    //defaults to RGB
+    xrange = 255;
+    yrange = 255;
+    zrange = 255;
+    String x = "R";
+    String y = "G";
+    String z = "B";
+    rgb = _rgb;
+    hsv = _hsv;
+    hsl = _hsl;
+    if(hsl || hsv){  
+    xrange = 360; //hue
+    yrange = 100; //sat
+    zrange = 100; //bright
+    }
+  }
+  
   
   
   void draw(){
@@ -47,8 +71,8 @@ class Plotter{
     axis();
   }
   
-  int alpha = 10;
-  int strokeW = 10;
+  int alpha = 100;
+  int strokeW = 4;
   
   void drawRGB(){
     for (int i = 0; i < data.size(); i++){   

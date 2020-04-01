@@ -25,13 +25,6 @@ void initMultiView(){
   }
 }
 
-//void initSingleCam(){
-//  //Single cam mode
-//  cam = new PeasyCam(this, 1000);
-//  cam.setFreeRotationMode();
-//}
-
-
 void drawMulitView(){
   // clear background once, for the whole window
   setGLGraphicsViewport(0, 0, width, height);
@@ -40,7 +33,7 @@ void drawMulitView(){
   for(int i = 0; i < cameras.length; i++){
     pushStyle();
     pushMatrix();
-    displayScene(cameras[i], i);
+    displayScene(cameras[i], i, modes[i], plots[i], clusters[i]);
     popMatrix();
     popStyle();
   }
@@ -58,53 +51,4 @@ void setGLGraphicsViewport(int x, int y, int w, int h){
   pgl.enable(PGL.SCISSOR_TEST);
   pgl.scissor (x,y,w,h);
   pgl.viewport(x,y,w,h);
-}
-
-
-public void displayScene(PeasyCam cam, int ID){
-  
-  int[] viewport = cam.getViewport();
-  int w = viewport[2];
-  int h = viewport[3];
-  int x = viewport[0];
-  int y = viewport[1];
-  int y_inv =  height - y - h; // inverted y-axis
-
-  // scissors-test and viewport transformation
-  setGLGraphicsViewport(x, y_inv, w, h);
-  
-  // modelview - using camera state
-  cam.feed();
-
-  // projection - using camera viewport
-  perspective(60 * PI/180, w/(float)h, 1, 5000);
-
-  // clear background (scissors makes sure we only clear the region we own)
-  background(24);  
-  stroke(0);
-  strokeWeight(1);
-  
-  // scene objects
-  pushMatrix();
-  translate(-100, 0, 0);
-  fill(0,96,255);
-  box(100);
-  popMatrix();
-
-  pushMatrix();
-  translate(100, 0, 0);
-  rotateX(PI/2);
-  float c = 255 * ID/(float) (cameras.length-1);
-  fill(255-c/2, 255, 255-c);
-  sphere(80);
-  popMatrix();
-  
-  // screen-aligned 2D HUD
-  cam.beginHUD();
-  rectMode(CORNER);
-  fill(0);
-  rect(0, 0, 60, 23);
-  fill(255,128,0);
-  text("cam "+ID, 10, 15);
-  cam.endHUD();
 }
