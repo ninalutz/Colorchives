@@ -12,6 +12,8 @@ class kMeans{
     float r,g,b;  // cluster color;
     Plotter p;
     boolean rgb, hsv, hsl;
+    
+    color[] colors = new color[NUM_CLUSTERS];
       
     float clusterSize = 20;
     float pointSize = 1.5;

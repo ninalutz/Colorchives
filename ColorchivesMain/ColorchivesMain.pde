@@ -113,5 +113,8 @@ public void displayScene(PeasyCam cam, int ID, String system, Plotter plot, kMea
   rect(0, 0, 60, 23);
   fill(255,128,0);
   text(system, 10, 15);
+  for(int i = 0; i<cluster.colors.length; i++){
+    r
+  }
   cam.endHUD();
 }
