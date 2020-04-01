@@ -1,37 +1,57 @@
 /*   
- float arrays var_x, var_y & var_z represent variables to be visualized
- arrays are filled with random values, limited to the dimensions of the axis
- make sure peasyCam libary is installed so you can move around in the plot.     
+3D Plotting of various color spaces and palettes
+Nina Lutz 2020 
+for Ofrenda Digital and Colorchives project at MIT Media Lab
  */
-import peasy.*;
-PeasyCam cam;
 
+import peasy.PeasyCam;
+import processing.opengl.PGL;
+import processing.opengl.PGraphics3D;
+import processing.opengl.PJOGL;
+
+
+//Multiple Camera Variables
+final int NX = 3;
+final int NY = 1;
+PeasyCam[] cameras = new PeasyCam[NX * NY];
+
+//Single came
+PeasyCam cam;
 Plotter p; 
+
+//Color variables 
 boolean hsv = true;
 boolean hsl;
 boolean rgb;
 String mode = "";
+
+public void settings(){
+  size(1600, 800, P3D); // 3D
+  smooth(8);
+}
+
 void setup ()
 {
-  size(800, 800, P3D);
-  if(rgb) mode = "RGB";
-  if(hsl) mode = "HSL";
-  if(hsv) mode = "HSV";
-  processImage("test.jpg");
-  setupClusters();
-  cam = new PeasyCam(this, 1000);
-  cam.setFreeRotationMode();
-  p = new Plotter(imageData);
+  initMultiView();
+ //initSingleCam();
+  //if(rgb) mode = "RGB";
+  //if(hsl) mode = "HSL";
+  //if(hsv) mode = "HSV";
+  //processImage("test.jpg");
+  //setupClusters();
+  //p = new Plotter(imageData);
 }
 
 
 void draw()
 {
-  background(20);
-  image(pic, -300 - pic.width/2, -300);
-  fill(255);
-  textSize(20);
-  text(mode, -350, -350);
-  p.draw();
-  drawClusters();
+  drawMulitView();
+  //background(20);
+  //image(pic, -300 - pic.width/2, -300);
+  //fill(255);
+  //textSize(20);
+  //text(mode, -350, -350);
+  //p.draw();
+  //drawClusters();
+  
 }

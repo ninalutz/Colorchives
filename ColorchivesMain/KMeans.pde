@@ -1,11 +1,15 @@
 // k-means 
 // CONSTANTS
+
+class kMeans{
 final int NUM_CLUSTERS = 8;
 boolean adjusted = false;
 // GLOBALS
 Point3D [] points;
 Point3D [] clusters;
 float r,g,b;  // cluster color;
+
+kMeans(){}
 
 // METHODS
 void setupClusters(){
@@ -134,4 +138,5 @@ class Point3D {
   }
   
 
+}
 }
