@@ -110,11 +110,14 @@ public void displayScene(PeasyCam cam, int ID, String system, Plotter plot, kMea
   cam.beginHUD();
   rectMode(CORNER);
   fill(0);
-  rect(0, 0, 60, 23);
-  fill(255,128,0);
+  fill(255);
+  textSize(15);
   text(system, 10, 15);
+  int palSize = 50;
   for(int i = 0; i<cluster.colors.length; i++){
-    r
+    fill(cluster.colors[i]);
+    noStroke();
+    rect(i*palSize, 30, palSize, palSize);
   }
   cam.endHUD();
 }

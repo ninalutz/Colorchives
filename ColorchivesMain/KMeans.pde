@@ -75,7 +75,8 @@ class kMeans{
       // Draws the clusters
       strokeWeight(clusterSize);
       for(int j=0;j<clusters.length;++j) {
-        stroke(clusterColor(j));
+        colors[j] = clusterColor(j);
+        stroke(colors[j]);
         PVector d = dataToAxis(new PVector(clusters[j].x, clusters[j].y, clusters[j].z));
         point(d.x, -d.y, d.z);
      }
