@@ -5,6 +5,9 @@ class Plotter{
   String x, y, z;
   int xrange, yrange, zrange;
   boolean rgb, hsv, hsl;
+  
+  int alpha = 100;
+  int strokeW = 4;
 
   Plotter(){
     x_axis = axis_length;
@@ -71,8 +74,6 @@ class Plotter{
     axis();
   }
   
-  int alpha = 100;
-  int strokeW = 4;
   
   void drawRGB(){
     for (int i = 0; i < data.size(); i++){   
