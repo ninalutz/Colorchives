@@ -27,6 +27,7 @@ color bgColor = color(20);
 
 public void settings(){
   size(1600, 900, P3D); // 3D
+  //size(200, 200);
   smooth(8);
 }
 
@@ -62,8 +63,7 @@ void setup (){
 }
 
 
-void draw()
-{
+void draw(){
   drawMulitView();
 }
 
