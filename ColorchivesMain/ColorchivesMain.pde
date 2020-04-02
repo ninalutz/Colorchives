@@ -9,7 +9,6 @@ import processing.opengl.PGL;
 import processing.opengl.PGraphics3D;
 import processing.opengl.PJOGL;
 
-
 //Multiple Camera Variables
 final int NX = 3;
 final int NY = 1;
@@ -27,15 +26,12 @@ kMeans k, k1, k2;
 color bgColor = color(20);
 
 public void settings(){
-  size(1600, 800, P3D); // 3D
+  size(1600, 900, P3D); // 3D
   smooth(8);
 }
 
-void setup ()
-{
-
-  
-  processImage("test.jpg");
+void setup (){
+  processImage(imageLink);
   modes[0] = "RGB";
   modes[1] = "HSV";
   modes[2] = "HSL";
@@ -51,7 +47,6 @@ void setup ()
   p2 = new Plotter(imageData, false, false, true); //hsl
   k2 = new kMeans(p2);
   k2.setupClusters();
-  
   
   plots[0] = p;
   plots[1] = p1;
@@ -98,10 +93,9 @@ public void displayScene(PeasyCam cam, int ID, String system, Plotter plot, kMea
   noStroke();
   
   // scene objects  
-
   pushMatrix();
   translate(-100, 0, 0);
-  image(pic, 0, 100);
+  image(pic, 0, 150, 150, 80);
   plot.draw();
   cluster.drawClusters();
   popMatrix();

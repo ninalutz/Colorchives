@@ -2,7 +2,7 @@
 // CONSTANTS
 
 class kMeans{
-    final int NUM_CLUSTERS = 8;
+    final int NUM_CLUSTERS = 6;
     boolean adjusted = false;
     // GLOBALS
     Point3D [] points;
@@ -89,7 +89,9 @@ class kMeans{
         stroke(c.x, c.y, c.z, 100);
         point(d.x, -d.y, d.z);
      }
-      if(clusters[0].x == prevCluster0) adjusted = true;
+      if(clusters[0].x == prevCluster0){
+        adjusted = true;
+      }
     }
     
     public color clusterColor(int j){
