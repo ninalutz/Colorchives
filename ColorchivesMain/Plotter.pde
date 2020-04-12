@@ -44,7 +44,7 @@ class Plotter{
   
    Plotter(ArrayList<PVector> _data, boolean _rgb, boolean _hsv, boolean _hsl){
     data = _data;
-    //testData();
+   // testData();
     x_axis = axis_length;
     y_axis = -axis_length;
     z_axis = axis_length;

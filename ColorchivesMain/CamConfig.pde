@@ -19,16 +19,17 @@ void initMultiView(){
       int id = y * NX + x;
       int cx = offx + x * tilex;
       int cy = offy + y * tiley;
-      cameras[id] = new PeasyCam(this, 400);
+      cameras[id] = new PeasyCam(this, 310);
       cameras[id].setViewport(cx, cy, cw, ch); // this is the key of this whole demo
     }
   }
+
 }
 
 void drawMulitView(){
   // clear background once, for the whole window
   setGLGraphicsViewport(0, 0, width, height);
-  
+
   // render scene once per camera/viewport
   for(int i = 0; i < cameras.length; i++){
     pushStyle();

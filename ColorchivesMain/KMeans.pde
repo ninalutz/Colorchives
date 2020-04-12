@@ -2,7 +2,6 @@
 // CONSTANTS
 
 class kMeans{
-    final int NUM_CLUSTERS = 6;
     boolean adjusted = false;
     // GLOBALS
     Point3D [] points;
@@ -60,7 +59,26 @@ class kMeans{
         clusters[j] = new Point3D(imageData.get(j).x, imageData.get(j).y, imageData.get(j).z);
       }
       assignClusters();
+      
+     
+    }
     
+    void assignClusterColors(){
+     for(int j=0;j<clusters.length;++j) {
+        colors[j] = clusterColor(j);
+     }
+     color temp; 
+      
+     for(int i=0;i<colors.length;i++) {
+       for (int j = i+1; j<colors.length; j++){
+        if(brightness(colors[i]) > brightness(colors[j])){  
+            temp = colors[i];    
+            colors[i] = colors[j];    
+            colors[j] = temp;    
+        }
+       }
+     
+    }
     }
     
     
@@ -70,12 +88,12 @@ class kMeans{
       if(!adjusted){
         assignClusters();
         adjustClusters();
+        assignClusterColors();
       }
      
       // Draws the clusters
       strokeWeight(clusterSize);
       for(int j=0;j<clusters.length;++j) {
-        colors[j] = clusterColor(j);
         stroke(colors[j]);
         PVector d = dataToAxis(new PVector(clusters[j].x, clusters[j].y, clusters[j].z));
         point(d.x, -d.y, d.z);
