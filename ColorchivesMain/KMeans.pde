@@ -60,7 +60,6 @@ class kMeans{
       }
       assignClusters();
       
-     
     }
     
     void assignClusterColors(){
@@ -80,6 +79,42 @@ class kMeans{
      
     }
     }
+    
+        
+    void assignClusters() {
+      for(int i=0;i<points.length;++i) {
+        double minLen = distance3(clusters[0],points[i]);
+        int minIndex=0;
+        for(int j=1;j<clusters.length;++j) {
+          double len = distance3(clusters[j],points[i]);
+          if(minLen > len) {
+            minLen=len;
+            minIndex=j;
+          }
+        }
+        points[i].cluster=minIndex;
+      }
+    }
+    
+    void adjustClusters() {
+      for(int j=0;j<clusters.length;++j) {
+        float x=0,y=0, z=0;
+        int sum=0;
+        for(int i=0;i<points.length;++i) {
+          if(points[i].cluster==j) {
+            x+=points[i].x;
+            y+=points[i].y;
+            z+=points[i].z;
+            sum++;
+          }
+        }
+        if(sum<1) sum=1;
+        clusters[j].x=x/sum;
+        clusters[j].y=y/sum;
+        clusters[j].z=z/sum;
+      }
+    }
+    
     
     
     void drawClusters() {
@@ -136,41 +171,7 @@ class kMeans{
       return dx*dx+dy*dy+dz*dz; 
     }
     
-    
-    void assignClusters() {
-      for(int i=0;i<points.length;++i) {
-        double minLen = distance3(clusters[0],points[i]);
-        int minIndex=0;
-        for(int j=1;j<clusters.length;++j) {
-          double len = distance3(clusters[j],points[i]);
-          if(minLen > len) {
-            minLen=len;
-            minIndex=j;
-          }
-        }
-        points[i].cluster=minIndex;
-      }
-    }
-    
-    void adjustClusters() {
-      for(int j=0;j<clusters.length;++j) {
-        float x=0,y=0, z=0;
-        int sum=0;
-        for(int i=0;i<points.length;++i) {
-          if(points[i].cluster==j) {
-            x+=points[i].x;
-            y+=points[i].y;
-            z+=points[i].z;
-            sum++;
-          }
-        }
-        if(sum<1) sum=1;
-        clusters[j].x=x/sum;
-        clusters[j].y=y/sum;
-        clusters[j].z=z/sum;
-      }
-    }
-    
+
     
       PVector dataToAxis(PVector point){
         float x = map(point.x, 0, xrange, 0, x_axis);
