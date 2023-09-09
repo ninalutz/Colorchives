@@ -1,6 +1,6 @@
 ArrayList<PVector> imageData;
 PImage pic;
-String imageLink = "testImages/test.jpg";
+String imageLink = "test2.png";
 
 void processImage(String imagePath){
   imageData = new ArrayList<PVector>();

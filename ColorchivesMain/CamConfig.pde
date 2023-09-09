@@ -31,10 +31,18 @@ void drawMulitView(){
   setGLGraphicsViewport(0, 0, width, height);
 
   // render scene once per camera/viewport
-  for(int i = 0; i < cameras.length; i++){
+  for(int i = 0; i < 1; i++){
     pushStyle();
     pushMatrix();
     displayScene(cameras[i], i, modes[i], plots[i], clusters[i]);
+    popMatrix();
+    popStyle();
+  }
+  
+  for(int i = 3; i < cameras.length; i++){
+    pushStyle();
+    pushMatrix();
+    displayScene(cameras[i], i, modes[i], plots[i]);
     popMatrix();
     popStyle();
   }

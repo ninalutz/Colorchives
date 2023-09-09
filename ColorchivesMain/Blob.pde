@@ -3,9 +3,15 @@ class Blob{
  float x, y;
  float w, h;
  float r;
+ kMeans k;
+  
+  Blob(color[] colors, float _r){
+    this.colors = colors;
+    r = _r;
+  }
   
   Blob(kMeans k, float _r){
-    colors = k.colors;
+    this.k = k;
     r = _r;
   }
   
@@ -21,6 +27,6 @@ class Blob{
 }
 
   void draw(float _x, float _y){
-    polygon(_x, _y, r, colors.length);
+    polygon(_x, _y, r, k.colors.length);
   }
 }

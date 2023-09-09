@@ -1,6 +1,6 @@
 class Plotter{
   ArrayList<PVector> data;
-  float axis_length = 100;
+  float axis_length = 90;
   float x_axis, y_axis, z_axis;
   String x, y, z;
   int xrange, yrange, zrange;
